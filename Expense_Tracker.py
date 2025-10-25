@@ -1,4 +1,10 @@
 import json
+# """
+# Add "Sort by category", "Delete", "Search"
+# Clean up
+# Final Push
+# """
+
 
 Categories = [
         "Food | Social Life | Pets | Transport | Culture | Household | Apparel | Beauty | Health | Education | Gift | Others"
