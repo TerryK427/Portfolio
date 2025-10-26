@@ -1,6 +1,6 @@
 import json
 # """
-# Add "Sort by category", "Search"
+# Add "Sort by category"
 # Clean up
 # Final Push
 # """
@@ -28,7 +28,8 @@ def main():
         elif (user_input.isdigit() and int(user_input) == 3) or user_input.lower() == "view expense":
             view_expense()
         elif (user_input.isdigit() and int(user_input) == 4) or user_input.lower() == "search for expense":
-            search_for_expense()
+            lookingfor = input("Which expense are you looking for? ")
+            search_for_expense(lookingfor)
         elif (user_input.isdigit() and int(user_input) == 5) or user_input.lower() == "sort by category":
             sort_by_category()
         elif (user_input.isdigit() and int(user_input) == 6) or user_input.lower() == "exit":
@@ -90,6 +91,23 @@ def view_expense():
             print("-----------------------------------------\nTotal used:", total)
     except FileNotFoundError:
         print("No Expenses saved!")
+
+def search_for_expense(Name):
+    try:
+        with open("total_expenses.json", 'r') as f:
+            expenses = json.load(f)
+        if isinstance(expenses, dict):
+            expenses = [expenses]
+        matches = [count for count in expenses if count["Name"].lower() == Name.lower()]
+        if len(matches) > 0:
+            print("Expenses matching your search:")
+            for number, matching in enumerate(matches, start=1):
+                print(str(number) +") Name:", matching["Name"], "| Cost:", matching["Cost"], "| Category:", matching["Category"])
+        else:
+            print("No expenses matching your input")
+    except FileNotFoundError:
+        print("File not found")
+            
 
 
 if __name__ == "__main__":

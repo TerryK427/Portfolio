@@ -8,5 +8,20 @@
         "Name": "Make-up",
         "Cost": 55.0,
         "Category": "Beauty"
+    },
+    {
+        "Name": "Lunch",
+        "Cost": 45.0,
+        "Category": "Food"
+    },
+    {
+        "Name": "Coffee",
+        "Cost": 23.0,
+        "Category": "Social Life"
+    },
+    {
+        "Name": "Coffee",
+        "Cost": 13.0,
+        "Category": "Food"
     }
 ]
