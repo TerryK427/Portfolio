@@ -1,22 +1,12 @@
 [
     {
         "Name": "Lunch",
-        "Cost": 43.5,
-        "Category": "Food"
-    },
-    {
-        "Name": "Lunch",
-        "Cost": 45.0,
+        "Cost": 35.0,
         "Category": "Food"
     },
     {
         "Name": "Make-up",
-        "Cost": 19.0,
+        "Cost": 55.0,
         "Category": "Beauty"
-    },
-    {
-        "Name": "Toy",
-        "Cost": 54.0,
-        "Category": "Social Life"
     }
 ]
