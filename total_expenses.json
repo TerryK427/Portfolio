@@ -20,8 +20,13 @@
         "Category": "Social Life"
     },
     {
-        "Name": "Coffee",
-        "Cost": 13.0,
-        "Category": "Food"
+        "Name": "Phone",
+        "Cost": 150.0,
+        "Category": "Other"
+    },
+    {
+        "Name": "Earphones",
+        "Cost": 55.0,
+        "Category": "Others"
     }
 ]

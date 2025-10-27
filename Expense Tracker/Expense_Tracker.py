@@ -1,9 +1,6 @@
 import json
-# """
-# Add "Sort by category"
 # Clean up
 # Final Push
-# """
 Categories = [ #List of all categories in order to iterate
         "Food", "Social Life", "Pets", "Transport", "Culture", "Household", "Apparel", "Beauty", "Health", "Education", "Gift", "Others"
     ]
@@ -11,10 +8,12 @@ Category_Text = "Food | Social Life | Pets | Transport | Culture | Household | A
 def main():
     while True: #Main Func, takes in user input and runs correct process
         print("Choose Option\n 1.Add Expense | 2. Remove Expense | 3. View Expense | 4. Search for Expense | 5. Sort by Category | 6. Exit")
-        user_input = input("Option: ")
-        if (user_input.isdigit() and int(user_input) == 1) or str(user_input.lower()) == "add expense":
+        user_input = input("--------------------------------\nOption (Write Number or Option Name): ")
+        if (user_input.isdigit() and int(user_input) == 1) or user_input.lower() == "add expense":
             Name = input("Usage: ")
             cost = float(input("Cost:" ))
+            if isinstance(cost, int):
+                cost = float(cost)
             print(Category_Text)
             category = input("Which Category? ")
             add_expense(Name, cost, category)
@@ -23,7 +22,7 @@ def main():
                 expenses = json.load(f)
             for i in expenses:
                 print(i["Name"], "---", i["Cost"])
-            desired_expense = input("Which expense would you like to remove: ")
+            desired_expense = input("--------------------------------\nWhich expense would you like to remove: ")
             remove_expense(desired_expense)
         elif (user_input.isdigit() and int(user_input) == 3) or user_input.lower() == "view expense":
             view_expense()
@@ -49,7 +48,7 @@ def add_expense(Name, cost, category): #Add Expense
     expense.append(new_expense)
     with open("total_expenses.json", "w") as f:
         json.dump(expense, f, indent=4)
-    print("Expense added!")
+    print("--------------------------------\nExpense added!\n--------------------------------")
 
 def remove_expense(Name): #Remove Expense
         try:
@@ -61,15 +60,15 @@ def remove_expense(Name): #Remove Expense
             if len(matches) == 1:
                 expenses.remove(matches[0])
             else:
-                print(f"Multiple expenses fonud for", Name)
+                print(f"--------------------------------\nMultiple expenses found for", Name)
                 for number, i in enumerate(matches, start=1):
                     print(f"{number} Cost: {i["Cost"]} | Category: {i["Category"]}")
                 while True:
                     try:
-                        choice = int(input("Which expense would you like to remove? "))
+                        choice = int(input("--------------------------------\nWhich expense would you like to remove? "))
                         if 1 <= choice <= len(matches):
                             expenses.remove(matches[choice-1])
-                            print("Removed Expense")
+                            print("--------------------------------\nRemoved Expense\n--------------------------------")
                             break
                         else:
                             print("Please Enter a Valid Number")
@@ -85,12 +84,13 @@ def view_expense():
         with open("total_expenses.json", "r") as f:
             expenses = json.load(f)
             total = 0
+            print("--------------------------------\n")
             for i in expenses:
                 print(i["Cost"], "used for", i["Name"], "in", i["Category"])
                 total += i["Cost"]
-            print("-----------------------------------------\nTotal used:", total)
+            print("--------------------------------\nTotal used:", total, "\n--------------------------------")
     except FileNotFoundError:
-        print("No Expenses saved!")
+        print("--------------------------------\nNo Expenses saved!\n--------------------------------")
 
 def search_for_expense(Name):
     try:
@@ -100,9 +100,10 @@ def search_for_expense(Name):
             expenses = [expenses]
         matches = [count for count in expenses if count["Name"].lower() == Name.lower()]
         if len(matches) > 0:
-            print("Expenses matching your search:")
+            print("--------------------------------\nExpenses matching your search:")
             for number, matching in enumerate(matches, start=1):
                 print(str(number) +") Name:", matching["Name"], "| Cost:", matching["Cost"], "| Category:", matching["Category"])
+            print("--------------------------------")
         else:
             print("No expenses matching your input")
     except FileNotFoundError:
@@ -119,13 +120,13 @@ def sort_by_category():
             print(f"For {category}:")
             filtered = [e for e in expenses if e['Category'].lower() == category.lower()]
             if not filtered:
-                print("No expenses here!")
+                print("No expenses here!\n--------------------------------")
             else:
                 for i in filtered:
-                    print(f"{i["Name"]} | {i["Cost"]} | {i["Category"]}")
+                    print(f"Name: {i["Name"]} | Cost: {i["Cost"]} | Category: {i["Category"]}")
+        print("--------------------------------")
     except FileNotFoundError:
         print("No File Found")
-
 
 if __name__ == "__main__":
     main()
