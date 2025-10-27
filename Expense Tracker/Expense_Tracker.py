@@ -108,6 +108,23 @@ def search_for_expense(Name):
     except FileNotFoundError:
         print("File not found")
             
+def sort_by_category():
+    try:
+        with open("total_expenses.json", "r") as f:
+            expenses = json.load(f)
+        if isinstance(expenses, dict):
+            expenses = [expenses]
+
+        for category in Categories:
+            print(f"For {category}:")
+            filtered = [e for e in expenses if e['Category'].lower() == category.lower()]
+            if not filtered:
+                print("No expenses here!")
+            else:
+                for i in filtered:
+                    print(f"{i["Name"]} | {i["Cost"]} | {i["Category"]}")
+    except FileNotFoundError:
+        print("No File Found")
 
 
 if __name__ == "__main__":
