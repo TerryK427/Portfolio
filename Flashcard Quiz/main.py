@@ -10,8 +10,8 @@ def main():
             question = input("Enter question: ")
             answer = input("Enter answer: ")
             deck.add_flashcard(question, answer)
-            print("Flashcard added!\n")
-        elif choice == '2':
+            print("Flashcard added!\n--------------------------------")
+        elif (user_input.isdigit() and int(user_input) == 2) or user_input.lower() == "take quiz":
             flashcard = deck.get_random_flashcard()
             if flashcard:
                 user_answer = input(f"Question: {flashcard.question}\nYour Answer: ")
@@ -21,14 +21,14 @@ def main():
                     print(f"Wrong! The correct answer is: {flashcard.answer}\n")
             else:
                 print("No flashcards available. Please add some first.\n")
-        elif choice == '3':
+        elif (user_input.isdigit() and int(user_input) == 3) or user_input.lower() == "view all flashcards":
             if deck.flashcards:
-                for idx, fc in enumerate(deck.flashcards, 1):
-                    print(f"{idx}. Q: {fc.question} | A: {fc.answer}")
+                for number, i in enumerate(deck.flashcards, 1):
+                    print(f"{number}. Q: {i.question} | A: {i.answer}")
                 print()
             else:
                 print("No flashcards available.\n")
-        elif choice == '4':
+        elif (user_input.isdigit() and int(user_input) == 4) or user_input.lower() == "exit":
             exit()
         else:
             print("Invalid choice. Please try again.\n")

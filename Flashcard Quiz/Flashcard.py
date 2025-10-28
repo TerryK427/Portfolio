@@ -6,16 +6,13 @@ class Flashcard:
         self.question = question
         self.answer = answer
 
-    # category = ["Math", "Science", "History", "Geography", "Literature"]
-    # difficulty_levels = ["Easy", "Medium", "Hard"]
-
 class Deck:
     def __init__(self, filename="data.json"):
         self.filename = filename
         self.flashcards = []
         self.load()
     
-    def load(self):
+    def load(self): # Load flashcards from json file
         try:
             with open(self.filename, 'r') as file:
                 data = json.load(file)
@@ -25,15 +22,15 @@ class Deck:
         except FileNotFoundError:
             print(f"File {self.filename} not found. Starting with an empty deck.")
     
-    def save(self):
+    def save(self): # Append flashcards to json file
         with open(self.filename, 'w') as file:
             data = [{'question': fc.question, 'answer': fc.answer} for fc in self.flashcards]
             json.dump(data, file, indent=4)
 
-    def add_flashcard(self, question, answer):
+    def add_flashcard(self, question, answer): # Add a new flashcard
         flashcard = Flashcard(question, answer)
         self.flashcards.append(flashcard)
         self.save()
 
-    def get_random_flashcard(self):
+    def get_random_flashcard(self): # Get a random flashcard
         return random.choice(self.flashcards) if self.flashcards else None
